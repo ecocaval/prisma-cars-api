@@ -1,8 +1,9 @@
+import { Car } from "@prisma/client";
 import { prisma } from "../config/database.js";
 
 async function getCars() {
   const data = await prisma.car.findMany();
-  return data;
+  return data as Omit<Car, "id" | "createAt">[];
 }
 
 async function getCar(id: number) {
@@ -11,7 +12,7 @@ async function getCar(id: number) {
       id: id,
     }
   });
-  return data;
+  return data as Omit<Car, "id" | "createAt">;
 }
 
 async function getCarWithLicensePlate(licensePlate: string) {
@@ -20,7 +21,7 @@ async function getCarWithLicensePlate(licensePlate: string) {
       licensePlate : licensePlate,
     }
   });
-  return data;
+  return data as Omit<Car, "id" | "createAt">;
 }
 
 async function createCar(model: string, licensePlate: string, year: number, color: string) {
