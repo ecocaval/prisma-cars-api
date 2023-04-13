@@ -1,0 +1,19 @@
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+model Car {
+    id           Int      @id @default(autoincrement())
+    model        String
+    licensePlate String   @unique
+    year         Int
+    color        String
+    createAt     DateTime @default(now())
+
+    @@map("cars")
+}
