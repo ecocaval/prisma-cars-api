@@ -14,6 +14,14 @@ model Car {
     year         Int
     color        String
     createAt     DateTime @default(now())
+    categoryId   Int?
+    category     Category? @relation(fields: [categoryId], references: [id])
 
     @@map("cars")
+}
+
+model Category {
+    id Int @id @default(autoincrement())
+    name String
+    cars Car[]
 }
